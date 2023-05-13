@@ -16,27 +16,25 @@
 
 <body>
     <section class="login d-flex">
-        <div class="login-left  h-100">
-            <div class="gambar">
-                <img src="LapanganLogin.png" alt="" width="775px" height="792px">
-            </div>
-
+        <div class="gambar"></div>
+        <div class="login-left">
         </div>
         <div class="login-right w-50">
             <div class="row bg-black justify-content-center align-items-center h-100" style="margin-right: 0px;">
                 <div class="col-8">
                     <h1>LOGIN</h1>
-                    <div class="login-form ">
+                    <form class="login-form" method="post" action="">
                         <label for="username" class="form-label">Username</label>
                         <input type="username" class="form-control" id="username" placeholder="Enter your username">
                         <label for="password" class="form-label">Password</label>
-                        <input type=" password" class="form-control" id="password" placeholder="Enter your password">
+                        <input type="password" class="form-control" id="password" placeholder="Enter your password">
                         <div class="row justify-content-end">
-                            <button class="Daftar">Daftar</button>
-                            
-                            <button class="Login">Login</button>
+                            <div class="col">
+                                <a href="../Daftar/daftar.html"><button class="Daftar" type="button">Daftar</button></a>
+                                <button class="Login" type="submit">Login</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
 
                 </div>
             </div>
