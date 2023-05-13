@@ -17,34 +17,32 @@
 <body>
     <section class="daftar d-flex">
         <div class="daftar-left  h-100">
-            <div class="gambar">
-                <img src="LapanganLogin.png" alt="" width="775px" height="792px">
-            </div>
+            <div class="gambar"></div>
 
         </div>
         <div class="daftar-right w-50">
             <div class="row bg-black justify-content-center align-items-center h-100" style="margin-right: 0px;">
                 <div class="col-8">
-                    <h1>DAFTAR</h1>
+                    <h1 class="">DAFTAR</h1>
                     <div class="daftar-form ">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="Enter your username">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="username" class="form-label fs-4">Username</label>
+                        <input type="text" class="form-control " id="username" placeholder="Enter your username">
+                        <label for="password" class="form-label fs-4">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                        <label for="email" class="form-label fs-4 ">Email</label>
                         <input type="email" class="form-control" id="email" placeholder="Enter your email">
-                        <label for="telephone" class="form-label">No. Telepon</label>
+                        <label for="telephone" class="form-label fs-4">No. Telepon</label>
                         <input type="text" class="form-control" id="telephone"
                             placeholder="Enter your telephone number">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter your password">
 
 
                         <div class="row justify-content-end">
-                            <button class="Login">Login</button>
-                            
-                            <button class="Daftar">Daftar</button>
+                            <div class="col">
+                                <a href="../Login/login.html"><button class="Login" type="button">Login</button></a>
+                                <button class="Daftar" type="submit">Daftar</button>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
