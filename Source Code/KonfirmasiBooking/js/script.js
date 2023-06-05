@@ -1,11 +1,6 @@
-const navlink = document.querySelectorAll(".nav-link");
-
-navlink.forEach((e) => {
-    console.log(e.target);
-}) 
-
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+        console.log(entry)
         
         if(entry.isIntersecting){
             entry.target.classList.add('show');
@@ -18,10 +13,9 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((el) => observer.observe(el));
 
-const nav =  document.querySelectorAll(".nav-link");
+const nav = new querySelectorAll(".nav-link");
 
 nav.addEventListener('click',(e) => {
     console.log(e.target)
 })
-
 
