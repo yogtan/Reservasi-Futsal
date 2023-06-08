@@ -59,7 +59,7 @@
                            
                         <div class="row justify-content-end">
                             <div class="col">
-                                <a href="../Login/login.html"><button class="Login" type="button">Login</button></a>
+                                <a href="login"><button class="Login" type="button">Login</button></a>
                                 <button class="Daftar" type="submit">Daftar</button>
                             </div>
                         </div>

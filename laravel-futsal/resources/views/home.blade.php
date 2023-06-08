@@ -6,7 +6,10 @@
       <div class="container hidden contHero">
         <h2 class="text-white  text-selamatDatang">Selamat Datang di</h2>
         <h1 class="text-red fw-bold text-GoeboexFutsal">GOEBOEX <span class="text-white text-Futsal">FUTSAL</span></h1>
+        @auth
+        @else
         <a class="btn-Register" href="/register">Registerasi</a>
+        @endauth
       </div>
     </section>
 

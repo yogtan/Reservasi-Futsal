@@ -9,6 +9,7 @@ class Lapangan extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     function menyewa() {
         return $this->hasMany(Transaksi::class,'kode_lapangan');

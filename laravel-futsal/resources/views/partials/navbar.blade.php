@@ -11,16 +11,16 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#heroSection">Home</a>
+            <a class="nav-link active" aria-current="page" href="/home#heroSection">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#lapSection">Lapangan</a>
+            <a class="nav-link" href="/home#lapSection">Lapangan</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#lokJaSection">Lokasi & Jam Buka</a>
+            <a class="nav-link" href="/home#lokJaSection">Lokasi & Jam Buka</a>
           </li>
           <li class="nav-item me-2">
-            <a class="nav-link" href="#cont">Contact</a>
+            <a class="nav-link" href="/home#cont">Contact</a>
           </li>
           @auth
           <li class="nav-item dropdown">
@@ -28,7 +28,7 @@
               Welcome, {{ auth()->user()->username }}
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/home"> Home</a></li>
+              <li><a class="dropdown-item" href="/home">Home</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <form action="/logout" method="post">

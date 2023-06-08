@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class Menyewa extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $table = 'menyewas';
+
 
     function user() {
         return $this->belongsTo(User::class,'id');
@@ -28,5 +31,13 @@ class Menyewa extends Model
             ->where('id_jadwal', $id_jadwal)
             ->whereDate('tanggal', Carbon::parse($tanggal)->format('Y-m-d'))
             ->exists();
+    }
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->booking_code = Str::random(8);
+        });
     }
 }

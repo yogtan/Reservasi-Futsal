@@ -15,8 +15,12 @@ class MenyewaController extends Controller
      */
     public function index()
     {
-        //
+        $menyewa = Menyewa::join('jadwals', 'menyewas.id_jadwal', '=', 'jadwals.id')
+            ->where('menyewas.id_user', Auth::id())
+            ->get();
+        return view('menyewa.index', compact('menyewa'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -31,15 +35,26 @@ class MenyewaController extends Controller
      */
     public function store(StoreMenyewaRequest $request)
     {
-        if (Gate::denies('create-sewa')) {
-            abort(403, 'Anda harus login untuk membuat sewa.'); // Tampilkan pesan error jika pengguna belum login
-        }
+        // if (Gate::denies('create-sewa')) {
+        //     abort(403, 'Anda harus login untuk membuat sewa.'); // Tampilkan pesan error jika pengguna belum login
+        // }
         $data = $request->validated();
         $data['id_lapangan'] = $request->input('id_lapangan');
         $data['id_user'] = Auth::id(); 
         $data['id_jadwal'] = $request->input('id_jadwal');
         $data['harga'] = $request->input('harga_lapangan');
         $data['tanggal'] = $request->input('tanggal');
+
+        // Check for duplicate order
+        $existingOrder = Menyewa::where('id_jadwal', $data['id_jadwal'])
+        ->where('tanggal', $data['tanggal'])
+        ->first();
+
+        if ($existingOrder) {
+        // Handle the duplicate order case
+        // For example, you can return an error message or redirect back with an error
+        return redirect()->back()->withErrors('Pesanan double pada waktu yang bersamaan.');
+        }
 
         Menyewa::create($data);
 

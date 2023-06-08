@@ -117,7 +117,7 @@
                                 {{ $waktu['jam'] }}
                                 </button><br>
                             @else
-                                <button class="mt-3 border-light" {{ $isSewaExists ? 'disabled' : '' }}>
+                                <button class="mt-3 border-light" onclick="return confirm('Pesan Lapangan {{ $jadwal['lapangan']->nama }} Jam {{ $waktu['jam'] }}?')" {{ $isSewaExists ? 'disabled' : '' }}>
                                     {{ $waktu['jam'] }}
                                 </button><br>
                             @endif
