@@ -16,7 +16,8 @@ class LapanganController extends Controller
     public function index()
     {
         $Lapangan = lapangan::all();
-        return view('home', compact('Lapangan'));
+        $title = "Home";
+        return view('home', compact('Lapangan','title'));
     }
 
     /**

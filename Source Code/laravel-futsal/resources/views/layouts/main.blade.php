@@ -13,7 +13,7 @@
     <link rel="icon" type="image/x-icon" href="../Img/Logo_Fix.png"/>
     <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     
-    <title>Landing Page</title>
+    <title>{{ $title }}</title>
   </head>
   <body>
 
@@ -26,6 +26,18 @@
     <!-- Animate JS -->
     <script src="../js/script.js"></script>
     <!-- Optional JavaScript; choose one of the two! -->
+        <!-- Event listener untuk reload saat tombol back diklik -->
+    <!-- Event listener untuk reload saat tombol back diklik -->
+    <script>
+      (function () {
+          window.onpageshow = function(event) {
+              if (event.persisted) {
+                  window.location.reload();
+              }
+          };
+      })(); 
+    </script>
+
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

@@ -22,28 +22,26 @@
               <th>Pembayaran</th>
             </tr>
           </thead>
-          <tbody>@foreach ($menyewa as $sewa)
-            <tr class="">
+          <tbody>
+            @foreach ($menyewa as $sewa)
+              <tr class="">
                 <td>{{ $sewa->booking_code }}</td>
                 <td>{{ $sewa->tanggal }}</td>
                 <td>{{ $sewa->jam }}</td>
                 <td class="{{ $sewa->status === 'Belum Lunas' ? 'text-danger' : 'text-success' }}">{{ $sewa->status }}</td>
                 <td>{{ $sewa->harga }}</td>
                 <td>
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-booking-code="{{ $sewa->booking_code }}">
                     Lakukan Pembayaran
                   </button>
                 </td>
-            </tr> 
-        @endforeach
+              </tr> 
+            @endforeach
           </tbody>
         </table>
       </div>  
     </div>
   </section>
-
-  <!-- Button trigger modal -->
-  
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,12 +52,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Kode Pembayaran : ....</p>
-          <p>Cara Pembayaran : </p>
+          <p id="bookingCode"></p>
+          <p>Cara Pembayaran:</p>
           <ul>
-            <li>Melakukan transfer ke no rekening dibawah : </li>
-            <li>No rek : ....</li>
-            <li>Bukti transfer dikirimkan via Whatsapp dengan nomor yang ada dibawah ini</li>
+            <li>Melakukan transfer ke nomor rekening di bawah:</li>
+            <li>No rek: ....</li>
+            <li>Bukti transfer dikirimkan via WhatsApp dengan nomor yang ada di bawah ini</li>
           </ul>
         </div>
         <div class="modal-footer">
@@ -69,5 +67,15 @@
       </div>
     </div>
   </div>
+
+  <script>
+    var myModal = document.getElementById('exampleModal');
+    myModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget;
+      var bookingCode = button.getAttribute('data-booking-code');
+      var bookingCodeElement = myModal.querySelector('#bookingCode');
+      bookingCodeElement.textContent = 'Kode Pembayaran: ' + bookingCode;
+    });
+  </script>
 
 @endsection
