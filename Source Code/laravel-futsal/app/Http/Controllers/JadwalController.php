@@ -17,6 +17,7 @@ class JadwalController extends Controller
     public function index($id_lapangan)
     {
         // Get the range of dates (7-day range starting from today)
+        $title = "Jadwal";
         $datePeriod = CarbonPeriod::create(now(), now()->addDays(6));
         $jadwalLapangan=[];
         foreach ($datePeriod as $date) {
@@ -36,7 +37,7 @@ class JadwalController extends Controller
         }
         
 
-        return view('jadwal.index', compact('jadwalLapangan', 'id_lapangan', 'lapangan'));
+        return view('jadwal.index', compact('jadwalLapangan', 'id_lapangan', 'lapangan', 'title'));
     }
 
     /**

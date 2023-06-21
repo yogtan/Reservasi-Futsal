@@ -18,7 +18,8 @@ class MenyewaController extends Controller
         $menyewa = Menyewa::join('jadwals', 'menyewas.id_jadwal', '=', 'jadwals.id')
             ->where('menyewas.id_user', Auth::id())
             ->get();
-        return view('menyewa.index', compact('menyewa'));
+        $title = "Booking";
+        return view('menyewa.index', compact('menyewa','title'));
     }
 
 
