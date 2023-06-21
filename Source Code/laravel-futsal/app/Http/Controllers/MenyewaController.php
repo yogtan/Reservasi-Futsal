@@ -59,7 +59,7 @@ class MenyewaController extends Controller
         Menyewa::create($data);
 
         $id_lapangan = $request->input('id_lapangan');
-        return redirect("/menyewa")->with('sewaSuccess', 'Penyewaan Success!');
+        return redirect("/menyewa")->with('sewaSuccess', 'Silahkan Lakukan Pembayaran!');
     }
 
     /**

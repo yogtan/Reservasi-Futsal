@@ -37,6 +37,20 @@
     -->
     <!-- swiperjs -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script> 
+    <script>
+        // Menyimpan informasi URL saat ini
+        var currentUrl = window.location.href;
+
+        // Mendeteksi perubahan riwayat peramban
+        window.onpopstate = function(event) {
+            // Membandingkan URL saat ini dengan URL sebelumnya
+            if (currentUrl !== event.target.location.href) {
+                // Melakukan refresh halaman
+                location.reload();
+            }
+        };
+    </script>
+ 
   </body>
 </html>
