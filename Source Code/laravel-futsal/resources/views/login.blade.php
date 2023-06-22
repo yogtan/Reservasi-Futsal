@@ -46,6 +46,9 @@
                         @enderror
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+
+                        <input type="checkbox" name="remember" id="remember">
+                        <label for="remember">Remember Me</label>
                         <div class="row justify-content-end">
                             <div class="col">
                                 <a href="register"><button class="Daftar" type="button">Daftar</button></a>

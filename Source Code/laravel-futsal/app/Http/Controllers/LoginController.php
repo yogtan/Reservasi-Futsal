@@ -18,10 +18,10 @@ class LoginController extends Controller
     {
         $credentials = $request->validate([
             'username' => 'required', 'username',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
-        if(Auth::attempt($credentials)){
+        if(Auth::attempt($credentials,$request->filled('remember'))){
             $request->session()->regenerate();
 
             if (auth()->user()->role == true) {

@@ -82,58 +82,74 @@
             </div>
           </div>
           <div class="col-12">
-            @if(session()->has('sewaSuccess'))
-        <div class="alert alert-success" role="alert">
-            {{ session('sewaSuccess') }}
-        </div>
-    @endif
-    <table class="table">
-        <thead>
-            <tr>
-                @foreach ($jadwalLapangan as $jadwal)
-                    <th>{{ $jadwal['dates'] }}<br>{{ $jadwal['day_name'] }}</th>
-                @endforeach
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                @foreach ($jadwalLapangan as $index => $jadwal)
-                    <td>
-                        @foreach ($jadwal['jadwal'] as $waktu)
-                        <form action="/menyewa" method="post">
-                            @csrf
-                            <input type="hidden" name="id_lapangan" value="{{ $jadwal['lapangan']->id }}">
-                            <input type="hidden" name="harga_lapangan" value="{{ $jadwal['lapangan']->harga }}">
-                            <input type="hidden" name="id_jadwal" value="{{ $waktu['id'] }}">
-                            <input type="hidden" name="tanggal" value="{{ $jadwal['date'] }}">
-                            @php
-                                $isSewaExists = \App\Models\menyewa::isSewaExists($jadwal['lapangan']->id, $waktu['id'],$jadwal['date']);
-                                $currentTime = Carbon::now();
-                                $jadwalTime = Carbon::createFromFormat('H.i', substr($waktu['jam'], 0, 5));
-                                
-                            @endphp
-                            @if ($jadwal['day_name'] === Carbon::now()->format('l') && $currentTime >= $jadwalTime)
-                                <button class="mt-3 border-light" disabled>
-                                {{ $waktu['jam'] }}
-                                </button><br>
-                            @else
-                                <button class="mt-3 border-light" onclick="return confirm('Pesan Lapangan {{ $jadwal['lapangan']->nama }} Jam {{ $waktu['jam'] }}?')" {{ $isSewaExists ? 'disabled' : '' }}>
-                                    {{ $waktu['jam'] }}
-                                </button><br>
-                            @endif
-                            </form>
-                            @php
-                                $isSewaExists = false;
-                            @endphp
+                @if(session()->has('sewaSuccess'))
+                  <div class="alert alert-success" role="alert">
+                      {{ session('sewaSuccess') }}
+                  </div>
+                @endif
+            <table class="table">
+                <thead>
+                    <tr>
+                        @foreach ($jadwalLapangan as $jadwal)
+                            <th>{{ $jadwal['dates'] }}<br>{{ $jadwal['day_name'] }}</th>
                         @endforeach
-                    </td>
-                @endforeach
-            </tr>
-        </tbody>
-    </table>
-
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @foreach ($jadwalLapangan as $index => $jadwal)
+                            <td>
+                                @foreach ($jadwal['jadwal'] as $waktu)
+                                <form action="/menyewa" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id_lapangan" value="{{ $jadwal['lapangan']->id }}">
+                                    <input type="hidden" name="harga_lapangan" value="{{ $jadwal['lapangan']->harga }}">
+                                    @php
+                                        $isSewaExists = \App\Models\menyewa::isSewaExists($jadwal['lapangan']->id, $waktu['id'],$jadwal['date']);
+                                      $currentTime = Carbon::now();
+                                        $jadwalTime = Carbon::createFromFormat('H.i', substr($waktu['jam'], 0, 5));
+                                        
+                                    @endphp
+                                    @if ($jadwal['day_name'] === Carbon::now()->format('l') && $currentTime >= $jadwalTime)
+                                        <input type="checkbox" name="selected_jadwal[]" value="{{ $waktu['id'] }}|{{ $jadwal['date'] }}" id="jadwal-{{ $waktu['id'] }}" disabled>
+                                        <label for="jadwal-{{ $waktu['id'] }}"class="badge bg-dark text-light">{{ $waktu['jam'] }}</label><br>
+                                    @else
+                                        <input type="checkbox" name="selected_jadwal[]" value="{{ $waktu['id'] }}|{{ $jadwal['date'] }}" id="jadwal-{{ $waktu['id'] }}" {{ $isSewaExists ? 'disabled' : '' }}>
+                                        <label for="jadwal-{{ $waktu['id'] }}" class="{{ $isSewaExists ? 'badge bg-dark text-light' : 'badge bg-danger text-light' }}">{{ $waktu['jam'] }}</label><br>
+                                    @endif
+                                    
+                                    @php
+                                        $isSewaExists = false;
+                                    @endphp
+                                @endforeach
+                            </td>
+                        @endforeach
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="center btn-register border-white p-2" id="submitBtn" style="display: none;">Submit</button>
+            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
+    <script>
+      // Ambil referensi checkbox dan tombol submit
+      const checkboxes = document.querySelectorAll('input[name="selected_jadwal[]"]');
+      const submitBtn = document.getElementById('submitBtn');
+    
+      // Tambahkan event listener untuk setiap checkbox
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+          // Periksa apakah ada checkbox yang dipilih
+          const anyCheckboxChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+    
+          // Atur visibilitas tombol submit berdasarkan kondisi checkbox yang dipilih
+          submitBtn.style.display = anyCheckboxChecked ? 'block' : 'none';
+        });
+      });
+    </script>
+    
     @endsection

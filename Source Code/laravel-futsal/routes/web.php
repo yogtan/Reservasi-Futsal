@@ -41,6 +41,7 @@ Route::get('/dashboard', function() {
 
 Route::resource('/dashboard/lapangan', DashboardLapanganController::class)->middleware('admin');
 Route::resource('/dashboard/penyewaan', DashboardMenyewaController::class)->middleware('admin');
+// Route::resource('/dashboard/penyewaan/search',  [DashboardMenyewaController::class, 'search'])->middleware('admin');
 Route::resource('/dashboard/laporan', DashboardLaporanController::class)->middleware('admin');
 
 // Route::get('/dashboard/penyewaan', [PenyewaanController::class, 'index'])->name('penyewaan.index')->middleware('auth');

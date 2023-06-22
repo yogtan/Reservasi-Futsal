@@ -36,32 +36,35 @@ class MenyewaController extends Controller
      */
     public function store(StoreMenyewaRequest $request)
     {
-        // if (Gate::denies('create-sewa')) {
-        //     abort(403, 'Anda harus login untuk membuat sewa.'); // Tampilkan pesan error jika pengguna belum login
-        // }
         $data = $request->validated();
-        $data['id_lapangan'] = $request->input('id_lapangan');
-        $data['id_user'] = Auth::id(); 
-        $data['id_jadwal'] = $request->input('id_jadwal');
-        $data['harga'] = $request->input('harga_lapangan');
-        $data['tanggal'] = $request->input('tanggal');
+        $selectedJadwal = $request->input('selected_jadwal');
 
-        // Check for duplicate order
-        $existingOrder = Menyewa::where('id_jadwal', $data['id_jadwal'])
-        ->where('tanggal', $data['tanggal'])
-        ->first();
+        foreach ($selectedJadwal as $jadwal) {
+            $values = explode('|', $jadwal);
+            $idJadwal = $values[0]; // ID jadwal
+            $date = $values[1];
+            $existingOrder = Menyewa::where('id_jadwal', $idJadwal)
+                ->where('tanggal', $date)
+                ->first();
 
-        if ($existingOrder) {
-        // Handle the duplicate order case
-        // For example, you can return an error message or redirect back with an error
-        return redirect()->back()->withErrors('Pesanan double pada waktu yang bersamaan.');
+            if ($existingOrder) {
+                return redirect()->back()->withErrors('Pesanan double pada waktu yang bersamaan.');
+            }
+
+            $newData = [
+                'id_lapangan' => $request->input('id_lapangan'),
+                'id_user' => Auth::id(),
+                'id_jadwal' => $idJadwal,
+                'harga' => $request->input('harga_lapangan'),
+                'tanggal' => $date,
+            ];
+
+            Menyewa::create($newData);
         }
 
-        Menyewa::create($data);
-
-        $id_lapangan = $request->input('id_lapangan');
         return redirect("/menyewa")->with('sewaSuccess', 'Penyewaan Success!');
     }
+
 
     /**
      * Display the specified resource.
