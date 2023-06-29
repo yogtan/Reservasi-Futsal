@@ -78,7 +78,7 @@ class DashboardLapanganController extends Controller
      */
     public function destroy(Lapangan $lapangan)
     {
-        dd($lapangan);
+        // dd($lapangan);
         lapangan::destroy($lapangan->id);
         return redirect('/dashboard/lapangan')->with('success', 'Data Lapangan Berhasil dihapus!');
     }

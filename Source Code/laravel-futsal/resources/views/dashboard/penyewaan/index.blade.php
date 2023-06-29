@@ -11,6 +11,14 @@
         </div>
     @endif
 
+    {{-- <form action="/dashboard/penyewaan/search" method="get" class="mb-3">
+        @csrf
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Cari berdasarkan kode booking" name="booking_code">
+            <button class="btn btn-primary" type="submit">Cari</button>
+        </div>
+    </form> --}}
+
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
